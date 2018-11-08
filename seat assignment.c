@@ -17,6 +17,8 @@ int main()
 	printf("Input the date when you will do the test.\nEx:10/15→1015,5/7→0507\n");
 	scanf("%s",&day);
 	srand(atoi(day));
+	int *SN;
+	SN = (int *)calloc(TnoStu, sizeof(int));
 
 	for (a = 0; a < TnoGS; a++)
 		{
@@ -45,7 +47,7 @@ int main()
 		}while(groupseat[c] == 0);
 	
 	groupseat[c] = groupseat[c] - 1; 
-	stunum[a] = c + 1; 	
+	SN[a] = c + 1; 	
 	out:;
 }
 
@@ -60,7 +62,7 @@ fp = fopen(name,"w"); //open the file
 
 for (a = 0; a < TnoStu; a++)
 	{
-		if(stunum[a] != 0)
+		if(SN[a] != 0)
 			{
 				fprintf(fp,"1832%03d,mv%d\n" ,a + 1 ,stunum[a]);
 			}
