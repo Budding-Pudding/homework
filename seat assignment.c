@@ -1,4 +1,4 @@
-﻿//seat assignment
+//seat assignment
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,68 +6,86 @@
 int main() 
 {	
 	int a,b,c;
-	int TnoStu = 173; //The number of student
-	int groupseat[] = {16,10,10,9,9,9,12,12,12,12,9,9,9,8,10,12}; //hold group of seats number
-	int missednum[] = {30,59,98,130,160}; //hold missing number
-	int stunum[TnoStu]; //array of the number of student
-	int seat = 0; //all seats in the class
-	char day[10]; //input date
-	int TnoGS = sizeof groupseat / sizeof groupseat[0]; //count array(groupseat)
-	int Tnomissednum = sizeof missednum / sizeof missednum[0]; //count array(missednum)
-	printf("Input the date when you will do the test.\nEx:10/15→1015,5/7→0507\n");
+	//The number of student
+	int NumOfStu = 173;
+	//hold group of seats number
+	int groupseat[] = {16,10,10,9,9,9,12,12,12,12,9,9,9,8,10,12};
+	//hold missing number
+	int missednum[] = {30,59,98,130,160};
+	//array of the number of student
+	int stunum[TnoStu];
+	//all seats in the class
+	int seat = 0;
+	//input date
+	char day[10];
+	//count array(groupseat)
+	int NumOfGS = sizeof groupseat / sizeof groupseat[0];
+	//count array(missednum)
+	int NumOfmissednum = sizeof missednum / sizeof missednum[0];
+	
+	printf("Input the date when you will do the test.\nEx:10/15→1015,5/7→0507\n→");
 	scanf("%s",&day);
 	srand(atoi(day));
+	
 	int *SN;
-	SN = (int *)calloc(TnoStu, sizeof(int));
+	SN = (int *)calloc(NumOfStu, sizeof(int));
 
-	for (a = 0; a < TnoGS; a++)
+	for (a = 0; a < NumOfGS; a++)
 		{
-			seat = seat + groupseat[a]; //calculate all seats in the class
+			//calculate all seats in the class
+			seat = seat + groupseat[a];
 		}
-	if (( TnoStu - Tnomissednum) != seat)
+	
+	if (( NumOfStu - NumOfmissednum) != seat)
 		{
 			//if error happened, this code will work
 			printf("Something going wrong.Please check it again."); 
         		return 0;
 		}
 
-	for (a = 0; a < TnoStu; a++)
+	for (a = 0; a < NumOfStu; a++)
+	{
+		for (b = 0; b < NumOfmissednum; b++)
 		{
-			for (b = 0; b < Tnomissednum; b++)
-				{
-					if (a + 1 == missednum[b] )
-						{
-							goto out; //break;&continue; become infinite loop
-						}
-				}
+			if (a + 1 == missednum[b] )
+			{
+				//break;&continue; become infinite loop
+				goto out;
+			}
+		}
 	
 	do
-		{
-			c = rand() % 16; //output random number	
-		}while(groupseat[c] == 0);
+	{
+		//output random number	
+		c = rand() % 16;
+	} while(groupseat[c] == 0);
 	
-	groupseat[c] = groupseat[c] - 1; 
+	groupseat[c] = groupseat[c] - 1;
 	SN[a] = c + 1; 	
 	out:;
-}
+	
+	}
 
-FILE *fp;
+	FILE *fp;
 
-char name[] = "seat";
+	char name[] = "seat";
+	
+	//make a file name
+	strcat(name,day);
+	strcat(name,".csv");
 
-strcat(name,day);
-strcat(name,".csv"); //make a file name
+	//open the file
+	fp = fopen(name,"w");
 
-fp = fopen(name,"w"); //open the file
-
-for (a = 0; a < TnoStu; a++)
+	for (a = 0; a < NumOfStu; a++)
 	{
 		if(SN[a] != 0)
-			{
-				fprintf(fp,"1832%03d,mv%d\n" ,a + 1 ,SN[a]);
-			}
+		{
+			fprintf(fp,"1832%03d,mv%d\n" ,a + 1 ,SN[a]);
+		}
 	}
-	fclose(fp);
 	
+	fclose(fp);
 	return 0;
+	
 }
