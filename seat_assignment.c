@@ -27,6 +27,7 @@ int main()
 	scanf("%s",&day);
 	srand(atoi(day));
 	
+	//to avoid the output file's bug
 	int *SN;
 	SN = (int *)calloc(NumOfStu, sizeof(int));
 
