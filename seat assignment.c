@@ -64,7 +64,7 @@ for (a = 0; a < TnoStu; a++)
 	{
 		if(SN[a] != 0)
 			{
-				fprintf(fp,"1832%03d,mv%d\n" ,a + 1 ,stunum[a]);
+				fprintf(fp,"1832%03d,mv%d\n" ,a + 1 ,SN[a]);
 			}
 	}
 	fclose(fp);
