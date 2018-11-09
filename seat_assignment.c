@@ -75,7 +75,7 @@ int main()
 	strcat(name,day);
 	strcat(name,".csv");
 
-	//open the file
+	//open the file for edit
 	fp = fopen(name,"w");
 
 	for (a = 0; a < NumOfStu; a++)
