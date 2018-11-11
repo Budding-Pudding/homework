@@ -13,7 +13,7 @@ int main()
 	//hold missing number
 	int missednum[] = {30,59,98,130,160};
 	//array of the number of student
-	int stunum[TnoStu];
+	int stunum[NumOfStu];
 	//all seats in the class
 	int seat = 0;
 	//input date
