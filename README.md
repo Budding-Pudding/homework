@@ -1,2 +1,2 @@
 # homework
-2s homework
+NS Homework
